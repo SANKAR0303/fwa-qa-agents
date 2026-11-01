@@ -1,0 +1,27 @@
+name: wifi_basic
+description: Basic Wi-Fi bring-up and client connectivity checks.
+cases:
+  - id: WIFI-001
+    name: 2.4GHz radio comes up
+    command: wifi status wlan0
+  - id: WIFI-002
+    name: 5GHz radio comes up
+    command: wifi status wlan1
+  - id: WIFI-003
+    name: SSID broadcast on both bands
+    command: wifi ssid list
+  - id: WIFI-004
+    name: Client associates on 2.4GHz
+    command: wifi assoc wlan0 test-client-1
+  - id: WIFI-005
+    name: Client associates on 5GHz
+    command: wifi assoc wlan1 test-client-1
+  - id: WIFI-006
+    name: DHCP lease issued to client
+    command: dhcp lease show test-client-1
+  - id: WIFI-007
+    name: Client reaches gateway
+    command: ping -c 4 192.168.1.1
+  - id: WIFI-008
+    name: Throughput above floor on 5GHz
+    command: iperf3 -c 192.168.1.1 -t 10
